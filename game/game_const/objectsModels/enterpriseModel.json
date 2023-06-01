@@ -1,0 +1,41 @@
+{
+  "genericInformations": {
+    "name": "$",
+    "playerId": "$"
+  },
+
+  "game": {
+    "quantities": {
+      "cash": 80000,
+      "materials": 100,
+      "employees": 10
+    },
+    "rates": {
+      "innovation": 30
+    },
+    "production": {
+      "materialsPerProduct": 1,
+      "employeesPerProdect": 0
+    },
+    "products": {
+      "nbDevelopedProducts": 1,
+      "products": [
+        {
+          "productIdentity": {
+            "id": 1,
+            "name": "$"
+          },
+          "productScores": {
+            "innovation": 30,
+            "brandImage": 30
+          },
+          "saleInformations": {
+            "price": "$",
+            "onStock": 0,
+            "onSale": 0
+          }
+        }
+      ]
+    }
+  }
+}

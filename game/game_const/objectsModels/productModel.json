@@ -1,0 +1,15 @@
+{
+  "productIdentity": {
+    "id": 1,
+    "name": "$"
+  },
+  "productScores": {
+    "innovation": 30,
+    "brandImage": 30
+  },
+  "saleInformations": {
+    "price": "$",
+    "onStock": 0,
+    "onSale": 0
+  }
+}

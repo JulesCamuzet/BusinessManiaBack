@@ -1,0 +1,15 @@
+{
+  "genericInformations": {
+    "gameId": "$",
+    "nbPlayers": "$",
+    "gameCreator": "$",
+    "playersId": []
+  },
+
+  "gameInformations": {
+    "tour": 0,
+    "enterprises": [],
+    "materialsCost": [],
+    "customers": []
+  }
+}

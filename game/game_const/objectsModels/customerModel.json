@@ -1,0 +1,13 @@
+{
+  "identity": {
+    "age": "$",
+    "type": "$",
+    "state": "$" 
+  },
+
+  "sensitivity": {
+    "innovation": "$",
+    "brandImage": "$",
+    "priceCap": "$"
+  }
+}
