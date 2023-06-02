@@ -2,26 +2,23 @@ const userExist = require("./userExist");
 
 const createUser = (email, password) => {
   return new Promise(async (resolve, reject) => {
-    userExist(email).then((result) => {
-      if (result === false) {       
-        // The user does not exists
-        // TODO 
-        resolve("User is being created.");
-      } else if (result === true) {
-        // The user already exists
-        resolve({
-          status: 409,
-          message: "User already exists."
-        })
+    userExist(email).then((userData) => {
+      if (!userData) {
+        // DO THE USER CREATION$
+        console.log("user creation");
       } else {
-        // An error has occured during the process
-        resolve(result)
+        throw new Error("userAlreadyExists");
       }
     });
   });
 };
 
 (async () => {
-  createUser("mail2.test@smtp.com", "coco")
-  .then(result => console.log(result));
-})()
+  try {
+    createUser("mail.test@smtp.com", "coco").then((result) =>
+      console.log(result)
+    );
+  } catch (error) {
+    console.error(error);
+  }
+})();

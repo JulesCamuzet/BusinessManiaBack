@@ -1,13 +1,13 @@
 /**
- * 
- * If no error, returns a Promise resolved with an object with status code 200 and the API normal response.
- * Else, returns a Promise resolved with an object with status code 500 and the error description.
- * 
- * @param {string} dataSource  - The cluster name 
+ *
+ * Returns a Promise resolved with an object with the API response or throw an error.
+ *
+ * @param {string} dataSource  - The cluster name
  * @param {string} database  - The database name
  * @param {string} collection - The collection name
- * 
- * @returns {Promise<{status: 200, body: object}>| Promise<{status: 500, message: string}>}
+ * @param {fitler} object - The filters to apply for the research
+ *
+ * @returns {Promise<object>}
  */
 
 const findSingleDocument = (dataSource, database, collection, filter) => {
@@ -32,17 +32,9 @@ const findSingleDocument = (dataSource, database, collection, filter) => {
 
     fetch(url, options).then((response) => {
       if (response.ok) {
-        response.text().then((result) => {
-          resolve({
-            status: 200,
-            body: JSON.parse(result),
-          });
-        });
+        response.text().then((result) => resolve(JSON.parse(result)));
       } else {
-        resolve({
-          status: 500,
-          message: "Error with API call.",
-        });
+        throw new Error("errorAtlasApi");
       }
     });
   });

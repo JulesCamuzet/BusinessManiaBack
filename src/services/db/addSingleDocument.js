@@ -1,15 +1,14 @@
 /**
- * 
- * If no error, returns a Promise resolved with an object with status code 200 and the API normal response.
- * Else, returns a Promise resolved with an object with status code 500 and the error description.
- * 
- * @param {object} document - The document that you want to add in the database 
- * @param {string} dataSource  - The cluster name 
+ *
+ * Returns a Promise resolved with an object with the API response or throw an error.
+ *
+ * @param {object} document - The document that you want to add in the database
+ * @param {string} dataSource  - The cluster name
  * @param {string} database  - The database name
  * @param {string} collection - The collection name
- * 
- * @returns {Promise<{status: 200, body: object}>| Promise<{status: 500, message: string}>}
- * 
+ *
+ * @returns {Promise<object>}
+ *
  */
 
 const addSingleDocument = (document, dataSource, database, collection) => {
@@ -34,20 +33,13 @@ const addSingleDocument = (document, dataSource, database, collection) => {
     fetch(url, options).then((response) => {
       if (response.ok) {
         response.text().then((result) => {
-          resolve({
-            status: 200,
-            body: JSON.parse(result),
-          });
+          resolve(JSON.parse(result));
         });
       } else {
-        resolve({
-          status: 500,
-          message: "Error with API call.",
-        });
+        throw new Error("errorAtlasApi");
       }
     });
   });
 };
-
 
 module.exports = addSingleDocument;
