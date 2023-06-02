@@ -3,19 +3,18 @@
  * If no error, returns a Promise resolved with an object with status code 200 and the API normal response.
  * Else, returns a Promise resolved with an object with status code 500 and the error description.
  * 
- * @param {object} document - The document that you want to add in the database 
  * @param {string} dataSource  - The cluster name 
  * @param {string} database  - The database name
  * @param {string} collection - The collection name
  * 
  * @returns {Promise<{status: 200, body: object}>| Promise<{status: 500, message: string}>}
- * 
  */
 
-const addSingleDocument = (document, dataSource, database, collection) => {
+const findSingleDocument = (dataSource, database, collection, filter) => {
   return new Promise(async (resolve, reject) => {
     const url =
-      "https://eu-west-2.aws.data.mongodb-api.com/app/data-auepf/endpoint/data/v1/action/insertOne";
+      "https://eu-west-2.aws.data.mongodb-api.com/app/data-auepf/endpoint/data/v1/action/findOne";
+
     const options = {
       method: "POST",
       headers: {
@@ -27,7 +26,7 @@ const addSingleDocument = (document, dataSource, database, collection) => {
         dataSource: dataSource,
         database: database,
         collection: collection,
-        document: document,
+        filter: filter,
       }),
     };
 
@@ -49,5 +48,4 @@ const addSingleDocument = (document, dataSource, database, collection) => {
   });
 };
 
-
-module.exports = addSingleDocument;
+module.exports = findSingleDocument;
