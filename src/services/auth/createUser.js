@@ -1,11 +1,21 @@
-const userExist = require("./userExist");
+const userExist = require("./userExists");
+const hashPassword = require("../hash/hashPassword");
+const addSingleDocument = require("../db/addSingleDocument");
 
 const createUser = (email, password) => {
   return new Promise(async (resolve, reject) => {
     userExist(email).then((userData) => {
       if (!userData) {
-        // DO THE USER CREATION$
         console.log("user creation");
+        const hashedPassword = hashPassword(password);
+        const newUser = {
+          email: email,
+          password: hashedPassword,
+        };
+        try {
+          addSingleDocument(newUser, "BusinessMania", "Users", "usersLogs");
+        } catch (error) {
+        }
       } else {
         throw new Error("userAlreadyExists");
       }
@@ -13,12 +23,5 @@ const createUser = (email, password) => {
   });
 };
 
-(async () => {
-  try {
-    createUser("mail.test@smtp.com", "coco").then((result) =>
-      console.log(result)
-    );
-  } catch (error) {
-    console.error(error);
-  }
-})();
+
+module.exports = createUser;
