@@ -1,30 +1,32 @@
 const findSingleDocument = require("../db/findSingleDocument");
 
 /**
- * 
- * Returns a Promise resolved with false OR with the Atlas Api reponse.
- * 
- * @param {string} email - The email address of the user that we want to identify 
+ *
+ *
+ * @param {string} email - The email address of the user that we want to identify
  * @returns {{Promise<boolean>}|Promise<object>}}
+ * 
+ * Returns a Promise.
+ * If the user exists, resolve with the user document object.
+ * If the user does not exists, resolve with false.
+ * If an error has occured with the API call, resolve with null.
  */
 
-const userExist = (email) => {
+const userExists = (email) => {
   return new Promise(async (resolve, reject) => {
-    const filter = {email: email};
-    try {
-      findSingleDocument("BusinessMania", "Users", "usersLogs", filter)
-      .then(documentObject => {
-        if (documentObject.document === null) {
+    const filter = { email: email };
+    findSingleDocument("BusinessMania", "Users", "usersLogs", filter).then(
+      (userDocumentObject) => {
+        if (userDocumentObject === null) {
+          resolve(null);
+        } else if (userDocumentObject.document === null) {
           resolve(false);
         } else {
-          resolve(documentObject);
+          resolve(userDocumentObject);
         }
-      })
-    } catch (error) {
-      console.error(error);
-    }
+      }
+    );
   });
 };
 
-
-module.exports = userExist;
+module.exports = userExists;

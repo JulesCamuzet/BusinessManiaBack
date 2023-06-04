@@ -1,6 +1,6 @@
 /**
  *
- * Returns a Promise resolved with an object with the API response or throw an error.
+ * Returns a Promise resolved resolved with null if API response is not ok, else with the API response 
  *
  * @param {string} dataSource  - The cluster name
  * @param {string} database  - The database name
@@ -30,13 +30,19 @@ const findSingleDocument = (dataSource, database, collection, filter) => {
       }),
     };
 
-    fetch(url, options).then((response) => {
-      if (response.ok) {
-        response.text().then((result) => resolve(JSON.parse(result)));
-      } else {
-        throw new Error("errorAtlasApi");
-      }
-    });
+    try {
+      fetch(url, options).then((response) => {
+        if (response.ok) {
+          response.text().then((result) => resolve(JSON.parse(result)));
+        } else {
+          resolve(null);
+        }
+      });
+    } catch (error) {
+      resolve(null);
+    }
+
+    
   });
 };
 

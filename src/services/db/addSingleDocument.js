@@ -1,6 +1,6 @@
 /**
  *
- * Returns a Promise resolved with an object with the API response or throw an error.
+ * Returns a Promise resolved resolved with null if API response is not ok, else with the API response 
  *
  * @param {object} document - The document that you want to add in the database
  * @param {string} dataSource  - The cluster name
@@ -36,7 +36,7 @@ const addSingleDocument = (document, dataSource, database, collection) => {
           resolve(JSON.parse(result));
         });
       } else {
-        throw new Error("errorAtlasApi");
+        resolve(null);
       }
     });
   });

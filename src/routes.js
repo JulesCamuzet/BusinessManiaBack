@@ -1,21 +1,15 @@
 const express = require("express");
-const login = require("./services/auth/login");
+const handleLogin = require("./services/handleRequests/handleLogin");
+const handleRegister = require("./services/handleRequests/handleRegister");
 
 const router = express.Router();
 
-router.post("/login", (req, res, next) => {
-  console.log(req.body);
-  const email = req.body.email;
-  const password = req.body.password;
-  try {
-    const user = login(email, password);
-    console.log("User loged in");
-    res.send("Good credentials");
-  } catch (error) {
-    console.log(error.name);
-    res.send(error.name);
-  }
-})
+router.post("/login", async (req, res, next) => {
+  handleLogin(req, res);
+});
 
+router.post("/register", (req, res, next) => {
+  handleRegister(req, res);
+})
 
 module.exports = router;
