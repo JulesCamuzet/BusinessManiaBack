@@ -3,7 +3,7 @@ const { default: validate } = require("deep-email-validator");
 /**
  *
  * @param {string} email
- * @returns {boolean}
+ * @returns {Promise}
  * 
  * Verify if the email format is valid.
  *

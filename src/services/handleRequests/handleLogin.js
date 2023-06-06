@@ -26,10 +26,14 @@ const handleLogin = async (req, res) => {
       responseBody = {
         success: {
           code: 200,
-          message: "User successfuly logged in.",
-          cookie: "A delicious cookie :D"
+          message: "User successfuly logged in."
         }
       };
+      req.session.user = email;
+      req.session.connected = true;
+      req.session.cookie.expires = 1000000;
+      console.log("Session after login")
+      console.log(req.session);
     }
     res.send(responseBody);
   });
